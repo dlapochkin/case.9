@@ -27,7 +27,10 @@ def runCommand(command):
         moveUp()
     elif command == 3:
         moveDown(os.getcwd())
-    
+    elif command==7:
+        print('Спасибо за использование нашей программы')
+        exit()
+
 
 
 def moveUp():
