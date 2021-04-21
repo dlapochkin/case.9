@@ -89,4 +89,20 @@ def countBytes(path):
     return total_size
 
 
+def findFiles(target, path):
+    directory = os.listdir(path)
+    files = []
+    dirs = []
+    for item in directory:
+        if os.path.isfile(path + '\\' + item):
+            files.append(item)
+    for item in directory:
+        if item not in files:
+            dirs.append(item)
+    for item in dirs:
+        findFiles(target, path + '\\' + item)
+    if target in files:
+        print(path + '\\' + target)
+
+
 main()
