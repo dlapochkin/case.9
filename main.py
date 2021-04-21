@@ -27,6 +27,10 @@ def runCommand(command):
         moveUp()
     elif command == 3:
         moveDown(os.getcwd())
+    elif command == 4:
+        path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
+        print(countFiles(path), 'файлов в каталоге.\n')
+        runCommand(acceptCommand())
     elif command==7:
         print('Спасибо за использование нашей программы')
         exit()
@@ -51,6 +55,24 @@ def moveDown(currentDir):
     else:
         print('Такого файла или папки не существует')
     runCommand(acceptCommand())
+
+
+def countFiles(path):
+    directory = os.listdir(path)
+    files = []
+    dirs = []
+    for item in directory:
+        if os.path.isfile(path + '\\' + item):
+            files.append(item)
+    for item in directory:
+        if item not in files:
+            dirs.append(item)
+    if len(dirs) == 0:
+        return len(files)
+    count = 0
+    for item in dirs:
+        count += countFiles(path + '\\' + item)
+    return count + len(files)
 
 
 main()
