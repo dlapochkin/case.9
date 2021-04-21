@@ -10,7 +10,10 @@ def main():
     7.Выход из пргораммы
     Выберите пункт меню:
     ''')
-    if funtion==1:
+    if funtion==2:
+        moveUp()
+    elif function==3:
+        moveDown(os.getcwd())
 
 def moveUp():
     currentDir=os.getcwd()
