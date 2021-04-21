@@ -96,7 +96,14 @@ def main():
 
 
 def acceptCommand():
-    function = int(input('''1.Промотр каталога 2.На уровень вверх 3.На уровень вниз 4.Количество файлов и каталогов 5.Размер текущего файла в байтах 6.Поиск файла 7.Выход из пргораммы Выберите пункт меню:'''))
+    function = int(input('''1.Промотр каталога 
+2.На уровень вверх 
+3.На уровень вниз
+4.Количество файлов и каталогов
+5.Размер текущего файла в байтах
+6.Поиск файла
+7.Выход из пргораммы
+Выберите пункт меню:'''))
     if function in (1, 2, 3, 4, 5, 6, 7):
         return function
     acceptCommand()
@@ -163,4 +170,10 @@ for i in os.walk(pdir):
 for i in contdir:
    i = str(i)
    end_list.append(i[i.find(',')+1:-1])
-print(end_list)
+
+
+path = 'C:/Users/gaga7/PycharmProjects/case.9'
+print(os.listdir(path))
+def move_file(path,level)
+    for i in os.listdir(path):
+        print('Level:', level, '')
