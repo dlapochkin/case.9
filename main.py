@@ -31,10 +31,13 @@ def runCommand(command):
         path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
         print(countFiles(path), 'файлов в каталоге.\n')
         runCommand(acceptCommand())
-    elif command==7:
+    elif command==5:
+        path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
+        print(countBytes(path), 'размер файлов в каталоге.\n')
+        runCommand(acceptCommand())
+    elif command == 7:
         print('Спасибо за использование нашей программы')
         exit()
-
 
 
 def moveUp():
@@ -73,6 +76,17 @@ def countFiles(path):
     for item in dirs:
         count += countFiles(path + '\\' + item)
     return count + len(files)
+
+
+def countBytes(path):
+    total_size = os.path.getsize(path)
+    for item in os.listdir(path):
+        itempath = os.path.join(path, item)
+        if os.path.isfile(itempath):
+            total_size += os.path.getsize(itempath)
+        elif os.path.isdir(itempath):
+            total_size += countBytes(itempath)
+    return total_size
 
 
 main()
