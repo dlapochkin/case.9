@@ -173,7 +173,32 @@ for i in contdir:
 
 
 path = 'C:/Users/gaga7/PycharmProjects/case.9'
-print(os.listdir(path))
-def move_file(path,level)
+#print(os.listdir(path))
+def move_file(path,level):
     for i in os.listdir(path):
         print('Level:', level, '')
+#a-m,b-n
+def comp(a,b,m,n):
+    if n == 0 or m == 0:
+        return ''
+    if len(a) > len(b):
+        if a[-1] == b[-1]:
+            return comp(a, b, m, n - 1)
+        return comp(a,b,m,n-1) + b[-1]
+    '''item = a[-m]
+    irem = a[-n]
+    if a[-1] == b[-1]:
+        return comp(a,b,m-1,n-1)
+    return comp(a,b,m-1,n-1) + item'''
+print(comp('123456','123',6,3))
+print('1234'[-1])
+def LCS_RECURSIVE(x, y):
+    if len(x) == 0 or len(y) == 0:
+        return []
+    if x[-1] == y[-1]:
+        return LCS_RECURSIVE(x[:-1], y[:-1]) + [x[-1]]
+    else:
+        left = LCS_RECURSIVE(x[:-1], y)
+        right = LCS_RECURSIVE(x, y[:-1])
+        return left if len(left) > len(right) else right
+#LCS_RECURSIVE('123456','123',6,3)
