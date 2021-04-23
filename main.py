@@ -2,12 +2,20 @@ import os
 
 
 def main():
+    '''
+    The main function that outputs the path to the current directory and the menu. Calls the command execution function.
+    :return: None
+    '''
     print(os.getcwd())
     function = acceptCommand()
     runCommand(function)
 
 
 def acceptCommand():
+    """
+    Requests the command number.Commands are requested until the correct command number is entered.
+    :return: the correct command number
+    """
     function = int(input('''1.Промотр каталога
 2.На уровень вверх
 3.На уровень вниз
@@ -23,6 +31,11 @@ def acceptCommand():
 
 
 def runCommand(command):
+    """
+    Determines by the command number which function should be executed.
+    :param command: the number of command
+    :return:None
+    """
     if command == 2:
         moveUp()
     elif command == 3:
@@ -31,7 +44,7 @@ def runCommand(command):
         path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
         print(countFiles(path), 'файлов в каталоге.\n')
         runCommand(acceptCommand())
-    elif command==5:
+    elif command == 5:
         path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
         print(countBytes(path), 'размер файлов в каталоге.\n')
         runCommand(acceptCommand())
@@ -41,6 +54,10 @@ def runCommand(command):
 
 
 def moveUp():
+    """
+    Makes the parent directory current.
+    :return:None
+    """
     currentDir = os.getcwd()
     print(os.getcwd())
     UpDir = currentDir[:currentDir.rfind('\\')]
@@ -50,6 +67,11 @@ def moveUp():
 
 
 def moveDown(currentDir):
+    """
+    Requests the name of the subdirectory. it makes the directory located in currentDir the current one.
+    :param currentDir: current directory
+    :return:None
+    """
     name = input('Ведите имя подкаталога:')
     new_name = currentDir + r'\\' + name
     if os.path.exists(new_name):
@@ -61,6 +83,11 @@ def moveDown(currentDir):
 
 
 def countFiles(path):
+    """
+    A recursive function that counts the number of files in the specified path.
+    :param path: the mame of the directory
+    :return:the number of files
+    """
     directory = os.listdir(path)
     files = []
     dirs = []
@@ -79,6 +106,11 @@ def countFiles(path):
 
 
 def countBytes(path):
+    """
+    A recursive function that calculates the total size (in bytes) of all files in the specified path.
+    :param path: the name of tne directory
+    :return:None
+    """
     total_size = os.path.getsize(path)
     for item in os.listdir(path):
         itempath = os.path.join(path, item)
@@ -90,6 +122,12 @@ def countBytes(path):
 
 
 def findFiles(target, path):
+    """
+  A recursive function that generates a list of paths to files that contain target.
+  :param target: tne name of the files
+  :param path: the name of tne directory
+  :return: None
+  """
     directory = os.listdir(path)
     files = []
     dirs = []
@@ -105,4 +143,5 @@ def findFiles(target, path):
         print(path + '\\' + target)
 
 
-main()
+if __name__ == '__main__':
+    main()
