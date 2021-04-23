@@ -149,7 +149,7 @@ def findFiles(target, path):
     for item in dirs:
         pool += findFiles(target, path + '\\' + item)
     if target in directory:
-        return pool + [os.getcwd() + '\\' + target]
+        return pool + [path + '\\' + target]
     if path == os.getcwd() and len(pool) == 0:
         return 'Не найдено ни одного файла с таким именем'
     return pool
