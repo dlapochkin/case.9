@@ -45,8 +45,15 @@ def runCommand(command):
         print(countFiles(path), 'файлов в каталоге.\n')
         runCommand(acceptCommand())
     elif command == 5:
-        path = input('Введите "." для подсчета файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
-        print(countBytes(path), 'размер файлов в каталоге.\n')
+        path = input('Введите "." для подсчета суммарный объемf файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
+        print('Общий размер файлов в каталоге составляет', countBytes(path), 'байт.\n')
+        runCommand(acceptCommand())
+    elif command == 6:
+        target = input('Введите имя файла, который требуется найти: ')
+        path = input('Введите "." для поиска файла в текущем каталоге, или укажите путь к нужному каталогу: ')
+        if path == '.':
+            path = os.getcwd()
+        print(findFiles(target, path), '\n')
         runCommand(acceptCommand())
     elif command == 7:
         print('Спасибо за использование нашей программы')
@@ -56,11 +63,13 @@ def runCommand(command):
 def moveUp():
     """
     Makes the parent directory current.
-    :return:None
+    :return: None
     """
     currentDir = os.getcwd()
-    print(os.getcwd())
-    UpDir = currentDir[:currentDir.rfind('\\')]
+    if currentDir.rfind('\\') == 2:
+        UpDir = currentDir[:currentDir.rfind('\\')+1]
+    else:
+        UpDir = currentDir[:currentDir.rfind('\\')]
     os.chdir(UpDir)
     print(os.getcwd())
     runCommand(acceptCommand())
@@ -72,13 +81,13 @@ def moveDown(currentDir):
     :param currentDir: current directory
     :return:None
     """
-    name = input('Ведите имя подкаталога:')
+    name = input('Ведите имя подкаталога: ')
     new_name = currentDir + r'\\' + name
     if os.path.exists(new_name):
         os.chdir(new_name)
         print(os.getcwd())
     else:
-        print('Такого файла или папки не существует')
+        print('Такого файла или папки не существует.')
     runCommand(acceptCommand())
 
 
@@ -109,7 +118,7 @@ def countBytes(path):
     """
     A recursive function that calculates the total size (in bytes) of all files in the specified path.
     :param path: the name of tne directory
-    :return:None
+    :return: total size (in bytes) of files
     """
     total_size = os.path.getsize(path)
     for item in os.listdir(path):
@@ -123,24 +132,27 @@ def countBytes(path):
 
 def findFiles(target, path):
     """
-  A recursive function that generates a list of paths to files that contain target.
-  :param target: tne name of the files
-  :param path: the name of tne directory
-  :return: None
-  """
+    A recursive function that generates a list of paths to files that contain target.
+    :param target: tne name of the file
+    :param path: the name of tne directory
+    :return: list of paths to target
+    """
     directory = os.listdir(path)
-    files = []
     dirs = []
+    pool = []
     for item in directory:
-        if os.path.isfile(path + '\\' + item):
-            files.append(item)
-    for item in directory:
-        if item not in files:
+        if os.path.isdir(path + '\\' + item):
             dirs.append(item)
+    if len(dirs) == 0:
+        if target in directory:
+            return pool + [path + '\\' + target]
     for item in dirs:
-        findFiles(target, path + '\\' + item)
-    if target in files:
-        print(path + '\\' + target)
+        pool += findFiles(target, path + '\\' + item)
+    if target in directory:
+        return pool + [os.getcwd() + '\\' + target]
+    if path == os.getcwd() and len(pool) == 0:
+        return 'Не найдено ни одного файла с таким именем'
+    return pool
 
 
 if __name__ == '__main__':
