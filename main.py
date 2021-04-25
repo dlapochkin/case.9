@@ -202,3 +202,9 @@ def LCS_RECURSIVE(x, y):
         right = LCS_RECURSIVE(x, y[:-1])
         return left if len(left) > len(right) else right
 #LCS_RECURSIVE('123456','123',6,3)
+
+path = os.getcwd()
+name_list = os.listdir(path)
+print(name_list)
+full_list = [os.path.join(path,i) for i in name_list]
+print(full_list)
