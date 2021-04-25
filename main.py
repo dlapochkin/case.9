@@ -34,7 +34,9 @@ def acceptCommand():
 '''))
     if function in (1, 2, 3, 4, 5, 6, 7):
         return function
-    acceptCommand()
+    else:
+        print('Номер команды указан некорректно ')
+        acceptCommand()
 
 
 def runCommand(command):
