@@ -45,7 +45,9 @@ def runCommand(command):
     :param command: the number of command
     :return:None
     """
-    if command == 2:
+    if command == 1:
+        all()
+    elif command == 2:
         moveUp()
     elif command == 3:
         moveDown(os.getcwd())
@@ -68,6 +70,12 @@ def runCommand(command):
         print('Спасибо за использование нашей программы')
         exit()
 
+
+def all():
+    path = os.getcwd()
+    name_list = os.listdir(path)
+    full_list = [os.path.join(path, i) for i in name_list]
+    return full_list
 
 def moveUp():
     """
