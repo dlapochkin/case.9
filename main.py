@@ -81,10 +81,13 @@ def directory_browsing():
         if os.path.isfile(name):
             print('Файл: ', name)
         elif os.path.isdir(name):
-            print('Каталог: ', name[1:])
+            if name[0] == '.':
+                print('Каталог: ', name[1:])
+            else:
+                print('Каталог: ', name)
         else:
             print('Не найдено', name)
-        runCommand(acceptCommand())
+    runCommand(acceptCommand())
 
 def moveUp():
     """
