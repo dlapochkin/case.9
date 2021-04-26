@@ -46,7 +46,7 @@ def runCommand(command):
     :return:None
     """
     if command == 1:
-        all()
+        directory_browsing()
     elif command == 2:
         moveUp()
     elif command == 3:
@@ -71,7 +71,7 @@ def runCommand(command):
         exit()
 
 
-def all():
+def directory_browsing():
     ''' 1 вариант списком
     path = os.getcwd()
     name_list = os.listdir(path)
