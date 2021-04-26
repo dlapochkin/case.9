@@ -72,10 +72,18 @@ def runCommand(command):
 
 
 def all():
+    ''' 1 вариант списком
     path = os.getcwd()
     name_list = os.listdir(path)
     full_list = [os.path.join(path, i) for i in name_list]
-    print(full_list)
+    print(full_list)'''
+    for name in os.listdir():
+        if os.path.isfile(name):
+            print('Файл: ', name)
+        elif os.path.isdir(name):
+            print('Каталог: ', name[1:])
+        else:
+            print('Не найдено', name)
 
 def moveUp():
     """
