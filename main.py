@@ -75,7 +75,7 @@ def all():
     path = os.getcwd()
     name_list = os.listdir(path)
     full_list = [os.path.join(path, i) for i in name_list]
-    return full_list
+    print(full_list)
 
 def moveUp():
     """
