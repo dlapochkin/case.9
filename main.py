@@ -205,6 +205,5 @@ def LCS_RECURSIVE(x, y):
 
 path = os.getcwd()
 name_list = os.listdir(path)
-print(name_list)
 full_list = [os.path.join(path,i) for i in name_list]
 print(full_list)
