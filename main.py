@@ -203,7 +203,10 @@ def LCS_RECURSIVE(x, y):
         return left if len(left) > len(right) else right
 #LCS_RECURSIVE('123456','123',6,3)
 
-path = os.getcwd()
-name_list = os.listdir(path)
-full_list = [os.path.join(path,i) for i in name_list]
-print(full_list)
+for  name in os.listdir():
+    if os.path.isfile(name):
+        print ('Файл: ', name)
+    elif os.path.isdir(name):
+        print('Каталог: ', name[1:])
+    else:
+        print ('Не найдено', name)
