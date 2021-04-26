@@ -84,6 +84,7 @@ def directory_browsing():
             print('Каталог: ', name[1:])
         else:
             print('Не найдено', name)
+        runCommand(acceptCommand())
 
 def moveUp():
     """
