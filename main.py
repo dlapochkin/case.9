@@ -3,7 +3,7 @@ Case-study 9
 Developers:
 Кривошапова Д. Е.:30%
 Кузнецов А. Д.: 25%
-Лапочкин Д. А.: 
+Лапочкин Д. А.: 37%
 """
 import os
 
@@ -23,13 +23,13 @@ def acceptCommand():
     Requests the command number.Commands are requested until the correct command number is entered.
     :return: the correct command number
     """
-    function = int(input('''1.Промотр каталога
-2.На уровень вверх
-3.На уровень вниз
-4.Количество файлов и каталогов
-5.Размер текущего файла в байтах
-6.Поиск файла
-7.Выход из пргораммы
+    function = int(input('''1. Просмотр каталога
+2. На уровень вверх
+3. На уровень вниз
+4. Количество файлов в текущем каталоге
+5. Размер текущего каталога в байтах
+6. Поиск файла
+7. Выход из программы
 Выберите пункт меню:
 '''))
     if function in (1, 2, 3, 4, 5, 6, 7):
@@ -56,7 +56,7 @@ def runCommand(command):
         print(countFiles(path), 'файлов в каталоге.\n')
         runCommand(acceptCommand())
     elif command == 5:
-        path = input('Введите "." для подсчета суммарный объемf файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
+        path = input('Введите "." для подсчета суммарного объема файлов в текущем каталоге, или укажите путь к нужному каталогу: ')
         print('Общий размер файлов в каталоге составляет', countBytes(path), 'байт.\n')
         runCommand(acceptCommand())
     elif command == 6:
@@ -72,19 +72,17 @@ def runCommand(command):
 
 
 def directory_browsing():
-    ''' 1 вариант списком
-    path = os.getcwd()
-    name_list = os.listdir(path)
-    full_list = [os.path.join(path, i) for i in name_list]
-    print(full_list)'''
+    """
+    Shows the contents of the directory
+    """
     for name in os.listdir():
         if os.path.isfile(name):
-            print('Файл: ', name)
+            print('Файл:', name)
         elif os.path.isdir(name):
             if name[0] == '.':
-                print('Каталог: ', name[1:])
+                print('Каталог:', name[1:])
             else:
-                print('Каталог: ', name)
+                print('Каталог:', name)
         else:
             print('Не найдено', name)
     runCommand(acceptCommand())
@@ -175,12 +173,13 @@ def findFiles(target, path):
     if len(dirs) == 0:
         if target in directory:
             return pool + [path + '\\' + target]
+        return pool
     for item in dirs:
         pool += findFiles(target, path + '\\' + item)
     if target in directory:
         return pool + [path + '\\' + target]
     if path == os.getcwd() and len(pool) == 0:
-        return 'Не найдено ни одного файла с таким именем'
+        return 'Не найдено ни одного файла с таким именем.'
     return pool
 
 
